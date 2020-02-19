@@ -107,6 +107,22 @@
     if (bgImgURL.length > 0) {
         __weak typeof(self) weakSelf = self;
         
+        [[SDWebImageManager sharedManager].imageLoader requestImageWithURL:[NSURL URLWithString:bgImgURL] options:0 context:nil progress:nil completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, BOOL finished) {
+            __strong typeof(self) strongSelf = weakSelf;
+            if (!error)
+            {
+                strongSelf.bgImageView.vv_width = strongSelf.vv_width;
+                strongSelf.bgImageView.vv_height = strongSelf.bgImageView.vv_width * image.size.height / strongSelf.bgImageView.vv_width;
+                if(strongSelf.bgImageView.vv_height > strongSelf.vv_height)
+                {
+                    strongSelf.bgImageView.vv_height = strongSelf.vv_height;
+                }
+                strongSelf.bgImageView.vv_bottom = strongSelf.vv_height;
+                strongSelf.bgImageView.image = image;
+            }
+        }];
+        
+        /**
         [[SDWebImageManager sharedManager].imageDownloader downloadImageWithURL:[NSURL URLWithString:bgImgURL] options:0 progress:nil completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, BOOL finished) {
             __strong typeof(self) strongSelf = weakSelf;
             if (!error)
@@ -121,6 +137,7 @@
                 strongSelf.bgImageView.image = image;
             }
         }];
+        */
     }
 }
 

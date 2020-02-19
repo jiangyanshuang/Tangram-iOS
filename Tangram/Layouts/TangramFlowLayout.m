@@ -673,6 +673,22 @@
             switch (self.bgScaleType) {
                 case TangramFlowLayoutBgImageScaleTypeFitStart:
                 {
+                    
+                    [[SDWebImageManager sharedManager].imageLoader requestImageWithURL:[NSURL URLWithString:self.bgImgURL] options:0 context:nil progress:nil completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, BOOL finished) {
+                        if (image) {
+                            
+                            self.bgImageView.image = image;
+                            CGFloat height = 0;
+                            if (image.size.width > 0) {
+                                // 等比例缩放
+                                height = (self.vv_width / image.size.width) * image.size.height;
+                            }
+                            self.bgImageView.vv_height = height;
+                            self.clipsToBounds = YES;
+                        }
+                    }];
+                    
+                    /**
                     [[SDWebImageManager sharedManager].imageDownloader downloadImageWithURL:[NSURL URLWithString:self.bgImgURL] options:0 progress:nil completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, BOOL finished) {
                         if (image) {
                             
@@ -686,7 +702,7 @@
                             self.clipsToBounds = YES;
                         }
                     }];
-
+                     */
                 }
                     break;
                 case TangramFlowLayoutBgImageScaleTypeFitXY:

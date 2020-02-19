@@ -5,6 +5,7 @@ platform :ios, '8.0'
 target 'TangramDemo' do
     project 'TangramDemo/TangramDemo.xcodeproj'
     pod 'Tangram', :path => './'
+    pod 'VirtualView', :git => 'https://github.com/jiangyanshuang/VirtualView-iOS'
     # pod 'VirtualView', :path => '../VirtualView/'
     # pod 'LazyScroll', :path => '../LazyScrollView/'
 end

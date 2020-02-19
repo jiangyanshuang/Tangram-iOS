@@ -557,6 +557,29 @@
     __weak typeof(self) weakSelf = self;
     //以1 为准
     if (self.indicatorImg1.length > 0) {
+        
+        [[SDWebImageManager sharedManager].imageLoader requestImageWithURL:[NSURL URLWithString:self.indicatorImg1] options:0 context:nil progress:nil completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, BOOL finished) {
+            __strong typeof(self) strongSelf = weakSelf;
+            if (!error) {
+                strongSelf.pageControl.selectedImage = image;
+                
+                if (strongSelf.indicatorHeight > 0) {
+                    strongSelf.pageControl.pageHeight = strongSelf.indicatorHeight;
+                    strongSelf.pageControl.pageWidth = strongSelf.pageControl.pageHeight * image.size.width / image.size.height;
+                    [strongSelf.pageControl sizeToFit];
+                }
+                else{
+                    [strongSelf reCalculatePageControlSizeWithImage:image];
+                    if (!strongSelf.hasSetIndicatorPosition) {
+                        [strongSelf heightChangedWithElement:nil model:nil];
+                    }
+                }
+                strongSelf.hasSetIndicatorPosition = YES;
+                [strongSelf calculatePageControlPosition];
+            }
+        }];
+
+        /**
         [[SDWebImageManager sharedManager].imageDownloader downloadImageWithURL:[NSURL URLWithString:self.indicatorImg1] options:0 progress:nil completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, BOOL finished) {
             __strong typeof(self) strongSelf = weakSelf;
             if (!error) {
@@ -577,14 +600,24 @@
                 [strongSelf calculatePageControlPosition];
             }
         }];
+        */
     }
     if (self.indicatorImg2.length > 0) {
+        [[SDWebImageManager sharedManager].imageLoader requestImageWithURL:[NSURL URLWithString:self.indicatorImg2] options:0 context:nil progress:nil completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, BOOL finished) {
+            __strong typeof(self) strongSelf = weakSelf;
+            if (!error) {
+                strongSelf.pageControl.normalImage = image;
+            }
+        }];
+        
+        /**
         [[SDWebImageManager sharedManager].imageDownloader downloadImageWithURL:[NSURL URLWithString:self.indicatorImg2] options:0 progress:nil completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, BOOL finished) {
             __strong typeof(self) strongSelf = weakSelf;
             if (!error) {
                 strongSelf.pageControl.normalImage = image;
             }
         }];
+         */
     }
 }
 
