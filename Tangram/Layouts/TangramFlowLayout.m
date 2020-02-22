@@ -712,6 +712,21 @@
             }
             
         }
+        //设置渐变背景色
+        if (self.bgStartColor && self.bgStartColor.length > 0 && self.bgEndColor && self.bgEndColor.length > 0) {
+            //设置按钮渐变背景色
+            CAGradientLayer *gradientLayer =  [CAGradientLayer layer];
+            gradientLayer.frame = self.bounds;
+            //设置渐变颜色方向，左上点为(0,0), 右下点为(1,1)
+            gradientLayer.startPoint = CGPointMake(0, 0);
+            gradientLayer.endPoint = CGPointMake(1, 0);
+            //设置颜色变化点，取值范围 0.0~1.0
+            gradientLayer.locations = @[@(0.0),@(1.0)];
+            //创建渐变色数组，需要转换为CGColor颜色
+            [gradientLayer setColors:@[(id)[[self hexColorWithString:self.bgStartColor alpha:1] CGColor],(id)[[self hexColorWithString:self.bgEndColor alpha:1] CGColor]]];
+            //注意
+            [self.layer insertSublayer:gradientLayer atIndex:0];
+        }
     }
     //加入组件化的卡片
     [self addSubLayouts];
@@ -843,6 +858,38 @@
     self.subLayoutDict = [mutableSubLayoutDict copy];
     self.subLayoutIdentifiers = [mutableSubLayoutIdentifiers copy];
 }
-
+- (UIColor *)hexColorWithString:(NSString *)string alpha:(float) alpha
+{
+    if ([string hasPrefix:@"#"]) {
+        string = [string substringFromIndex:1];
+    }
+    
+    NSString *pureHexString = [[string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] uppercaseString];
+    
+    if ([pureHexString length] != 6) {
+        return [UIColor whiteColor];
+    }
+    
+    NSRange range;
+    range.location = 0;
+    range.length = 2;
+    NSString *rString = [pureHexString substringWithRange:range];
+    
+    range.location += range.length ;
+    NSString *gString = [pureHexString substringWithRange:range];
+    
+    range.location += range.length ;
+    NSString *bString = [pureHexString substringWithRange:range];
+    
+    unsigned int r, g, b;
+    [[NSScanner scannerWithString:rString] scanHexInt:&r];
+    [[NSScanner scannerWithString:gString] scanHexInt:&g];
+    [[NSScanner scannerWithString:bString] scanHexInt:&b];
+    
+    return [UIColor colorWithRed:((float) r / 255.0f)
+                           green:((float) g / 255.0f)
+                            blue:((float) b / 255.0f)
+                           alpha:alpha];
+}
 
 @end

@@ -9,7 +9,10 @@
                 "type": "container-oneColumn",
                 "id": "first-line",
                 "style":{
-                    "padding":["5rp","5","5","5"]
+                    "padding":["5rp","5","5","5"],
+                    "bgColor": "#FF1493",
+                    "bgStartColor": "#FFF0F5",
+                    "bgEndColor": "#DC143C"
                 },
                 "items": [
                     {

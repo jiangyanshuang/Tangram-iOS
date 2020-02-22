@@ -106,6 +106,14 @@
     if (bgImgURL.length > 0 && [layout respondsToSelector:@selector(setBgImgURL:)]) {
         layout.bgImgURL = bgImgURL;
     }
+    NSString *bgStartColor = [styleDict tm_stringForKey:@"bgStartColor"];
+    if (bgStartColor.length > 0 && [layout respondsToSelector:@selector(setBgStartColor:)]) {
+        layout.bgStartColor = bgStartColor;
+    }
+    NSString *bgEndColor = [styleDict tm_stringForKey:@"bgEndColor"];
+    if (bgEndColor.length > 0 && [layout respondsToSelector:@selector(setBgEndColor:)]) {
+        layout.bgEndColor = bgEndColor;
+    }
     return [TangramLayoutParseHelper layoutConfigByOriginLayout:layout withDict:dict];
 }
 

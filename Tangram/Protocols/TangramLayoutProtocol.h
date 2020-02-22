@@ -53,6 +53,11 @@ typedef NSString TangramLayoutType;
 // Set Background Url
 - (void)setBgImgURL:(NSString *)imgURL;
 
+// 渐变背景色起始颜色"#FF2525"
+- (void)setBgStartColor:(NSString *)bgStartColor;
+// 渐变背景色结束颜色"#FFEFD5"
+- (void)setBgEndColor:(NSString *)bgEndColor;
+
 - (void)setHeaderItemModel:(NSObject<TangramItemModelProtocol> *)model;
 - (NSObject<TangramItemModelProtocol> *)headerItemModel;
 - (void)setFooterItemModel:(NSObject<TangramItemModelProtocol> *)model;
