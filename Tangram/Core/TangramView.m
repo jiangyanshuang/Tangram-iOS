@@ -738,6 +738,8 @@
 
 - (void)setContentOffset:(CGPoint)contentOffset
 {
+    [super setContentOffset:contentOffset];
+
     NSUInteger min = [self layoutIndexByHeight:self.contentOffset.y];
     NSUInteger max = [self layoutIndexByHeight:self.contentOffset.y + self.vv_height];
     [self.visibleLayoutIdentifierSet removeAllObjects];
@@ -831,8 +833,6 @@
     for (UIView<TangramLayoutProtocol> *layout in self.dragableLayoutArray) {
         layout.frame = CGRectMake(layout.frame.origin.x, ((TangramDragableLayout *)layout).originPoint.y + self.contentOffset.y , layout.frame.size.width, layout.frame.size.height);
     }
-    
-    [super setContentOffset:contentOffset];
 }
 
 @end
