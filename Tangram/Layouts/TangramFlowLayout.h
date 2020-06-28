@@ -44,6 +44,8 @@ typedef NS_ENUM(NSUInteger,TangramFlowLayoutBgImageScaleType)
 @property   (nonatomic, strong) NSString        *bgStartColor;
 // 渐变背景色结束颜色"#FFEFD5"
 @property   (nonatomic, strong) NSString        *bgEndColor;
+// 卡片切圆角
+@property   (nonatomic, strong) NSString        *cornerRadius;
 // TangramBus
 @property   (nonatomic, weak)   TangramBus      *tangramBus;
 

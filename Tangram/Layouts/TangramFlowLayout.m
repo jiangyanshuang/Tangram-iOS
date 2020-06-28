@@ -717,6 +717,13 @@
         if (self.bgStartColor && self.bgStartColor.length > 0 && self.bgEndColor && self.bgEndColor.length > 0) {
             [self az_setGradientBackgroundWithColors:@[[self hexColorWithString:self.bgStartColor alpha:1],[self hexColorWithString:self.bgEndColor alpha:1]] locations:@[@(0.0),@(1.0)] startPoint:CGPointMake(0, 0) endPoint:CGPointMake(1, 0)];
         }
+        //卡片切圆角
+        if (self.cornerRadius) {
+            if ([self.cornerRadius floatValue] > 0) {
+                self.layer.cornerRadius = [self.cornerRadius floatValue];
+                self.clipsToBounds = YES;
+            }
+        }
     }
     //加入组件化的卡片
     [self addSubLayouts];
