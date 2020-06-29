@@ -114,6 +114,10 @@
     if (bgEndColor.length > 0 && [layout respondsToSelector:@selector(setBgEndColor:)]) {
         layout.bgEndColor = bgEndColor;
     }
+    NSString *cornerRadius = [styleDict tm_stringForKey:@"cornerRadius"];
+    if (cornerRadius.length > 0 && [layout respondsToSelector:@selector(setCornerRadius:)]) {
+        layout.cornerRadius = cornerRadius;
+    }
     return [TangramLayoutParseHelper layoutConfigByOriginLayout:layout withDict:dict];
 }
 

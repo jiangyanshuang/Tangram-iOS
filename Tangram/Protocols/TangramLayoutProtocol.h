@@ -57,7 +57,8 @@ typedef NSString TangramLayoutType;
 - (void)setBgStartColor:(NSString *)bgStartColor;
 // 渐变背景色结束颜色"#FFEFD5"
 - (void)setBgEndColor:(NSString *)bgEndColor;
-
+// 卡片切圆角
+- (void)setCornerRadius:(NSString *)cornerRadius;
 - (void)setHeaderItemModel:(NSObject<TangramItemModelProtocol> *)model;
 - (NSObject<TangramItemModelProtocol> *)headerItemModel;
 - (void)setFooterItemModel:(NSObject<TangramItemModelProtocol> *)model;
