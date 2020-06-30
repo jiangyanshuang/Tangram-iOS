@@ -13,6 +13,7 @@
 @interface TangramEvent () {
     NSMutableDictionary *_params;
     NSMutableDictionary *_meta;
+    id _obj;
 }
 
 @end
@@ -30,6 +31,11 @@
     return _meta ? [_meta copy] : nil;
 }
 
+- (id)obj
+{
+    return _obj ? [_obj copy] : nil;
+}
+
 - (void)setParam:(id)param forKey:(NSString *)key
 {
     if (nil == _params) {
@@ -44,6 +50,10 @@
         _meta = [[NSMutableDictionary alloc] init];
     }
     [_meta tm_safeSetObject:meta forKey:key];
+}
+
+- (void)setObj:(id)obj {
+    _obj = obj;
 }
 
 #pragma mark - Public

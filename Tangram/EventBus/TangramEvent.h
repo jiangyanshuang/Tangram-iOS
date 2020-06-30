@@ -41,6 +41,9 @@
  */
 - (nullable NSDictionary *)meta;
 
+/** id对象（作用就是传递额外id对象） */
+- (nullable id)obj;
+
 /**
  * Add a param to business params (can be read from params)
  */
@@ -50,6 +53,9 @@
  * Add a param to meta params (can be read from meta)
  */
 - (void)setMeta:(nonnull id)param forKey:(nonnull NSString *)key;
+
+/** id对象（作用就是传递额外id对象） */
+- (void)setObj:(nonnull id)obj;
 
 /**
  * Generate a context instance
