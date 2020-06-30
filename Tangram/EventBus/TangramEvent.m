@@ -33,7 +33,7 @@
 
 - (id)obj
 {
-    return _obj ? [_obj copy] : nil;
+    return _obj ? _obj : nil;
 }
 
 - (void)setParam:(id)param forKey:(NSString *)key
